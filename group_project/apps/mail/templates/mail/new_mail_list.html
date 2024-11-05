@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메일 목록</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>메일 목록</h1>
+            <a href="{% url 'mail:compose_mail' %}" class="button">메일 작성</a>
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <!-- Navigation between received and sent mails -->
+            <nav>
+                <a href="{% url 'mail:mail_list' %}?filter=received" class="button">받은 메일함</a>
+                <a href="{% url 'mail:mail_list' %}?filter=sent" class="button">보낸 메일함</a>
+            </nav>
+            <ul style="list-style: none; padding: 0;">
+                {% if filter == 'received' %}
+                    {% if mails %}
+                        {% for mail in mails %}
+                            <li style="padding: 10px; border-bottom: 1px solid #ddd;">
+                                <strong>보낸 사람:</strong> {{ mail.sender }}<br>
+                                <strong>제목:</strong> <a href="{% url 'mail:mail_detail' mail.id %}">{{ mail.subject }}</a><br>
+                                <p>{{ mail.body|slice:":100" }}...</p>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>받은 메일이 없습니다.</li>
+                    {% endif %}
+                {% elif filter == 'sent' %}
+                    {% if mails %}
+                        {% for mail in mails %}
+                            <li style="padding: 10px; border-bottom: 1px solid #ddd;">
+                                <strong>받는 사람:</strong> {{ mail.recipient }}<br>
+                                <strong>제목:</strong> <a href="{% url 'mail:mail_detail' mail.id %}">{{ mail.subject }}</a><br>
+                                <p>{{ mail.body|slice:":100" }}...</p>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>보낸 메일이 없습니다.</li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

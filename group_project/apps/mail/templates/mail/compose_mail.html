@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메일 작성</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>메일 작성</h1>
+            <a href="{% url 'mail:mail_list' %}" class="button">메일 목록으로 돌아가기</a>
+        </div>
+    </header>
+    <main>
+        <div class="main-container" style="max-width: 600px; margin: 0 auto;">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <div class="error-messages">
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+                
+                <label for="{{ form.recipient.id_for_label }}">받는 사람:</label>
+                {{ form.recipient }}<br><br>
+                
+                <label for="{{ form.cc.id_for_label }}">참조:</label>
+                {{ form.cc }}<br><br>
+                
+                <label for="{{ form.subject.id_for_label }}">제목:</label>
+                {{ form.subject }}<br><br>
+                
+                <label for="{{ form.body.id_for_label }}">내용:</label>
+                {{ form.body }}<br><br>
+                
+                <label for="{{ form.attachments.id_for_label }}">첨부파일:</label>
+                {{ form.attachments }}<br><br>
+
+                <button type="submit" class="button">전송</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈페이지</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+        /* 기본 스타일 유지 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* 헤더 스타일 */
+        .header-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #333;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container h1 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .logout-button {
+            background-color: #e74c3c;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* 메인 컨테이너 - 그리드 레이아웃으로 수정 */
+        .main-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* 버튼 스타일 */
+        .button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        /* 환영 메시지 카드 */
+        .welcome-card {
+            width: 100%;
+            max-width: 540px;
+            text-align: center;
+            background-color: #ecf0f1;
+            border: 1px solid #ddd;
+        }
+
+        /* 내부 버튼 정렬 */
+        .welcome-card-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-container">
+            <h1>DGS 그룹웨어</h1>
+            <form id="logout-form" method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">로그아웃</button>
+            </form>
+        </div>
+    </header>
+
+    <!-- 메인 -->
+    <main>
+        <div class="main-container">
+            <!-- 카드들 -->
+            <div class="card">
+                <h2>뽑기 게임</h2>
+                <a href="#" class="button" onclick="alert('기능이 구현될 때까지 기다려주세요.')">게임으로 이동</a>
+            </div>
+            <div class="card">
+                <h2>프로젝트 일정관리</h2>
+                <a href="#" class="button" onclick="alert('기능이 구현될 때까지 기다려주세요.')">일정 관리로 이동</a>
+            </div>
+            <div class="card">
+                <h2>캘린더</h2>
+                <a href="{% url 'scheduler:calendar' %}" class="button">캘린더로 이동</a>
+            </div>
+            <div class="card">
+                <h2>출석 관리</h2>
+                <a href="{% url 'attendance:index' %}" class="button">출석 관리로 이동</a>
+            </div>
+            <div class="card">
+                <h2>사용자 리스트</h2>
+                <a href="{% url 'user_list' %}" class="button">사용자 리스트</a>
+            </div>
+            <div class="card welcome-card">
+                <h2>{{ user.username }}님 안녕하세요</h2>
+                <div class="welcome-card-buttons">
+                    <a href="{% url 'mail:mail_list' %}" class="button">메일</a>
+                    <a href="{% url 'messenger:chat_list' %}" class="button">메신저</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

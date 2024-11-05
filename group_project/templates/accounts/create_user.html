@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 생성</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>사용자 생성</h1>
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="form-container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.username.label_tag }} {{ form.username }}
+                    <br><br>
+                    
+                    {{ form.email.label_tag }} {{ form.email }}
+                    <br><br>
+
+                    {{ form.password1.label_tag }} {{ form.password1 }}
+                    <small>비밀번호는 6자 이상 입력하세요.</small>
+                    <br><br>
+
+                    {{ form.password2.label_tag }} {{ form.password2 }}
+                    <br><br>
+
+                    <button type="submit" class="button">사용자 생성</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

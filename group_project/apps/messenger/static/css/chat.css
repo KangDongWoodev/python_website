@@ -1,0 +1,114 @@
+/* 전체 레이아웃 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* 채팅룸 스타일 */
+#chat-room {
+    display: flex;
+    flex-direction: column;
+    height: 90vh; /* 채팅창을 브라우저 높이에 맞게 설정 */
+    position: relative;
+}
+
+/* 상대방 이름 영역 스타일 */
+#receiver {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* 메시지 로그 영역 스타일 */
+#chat-log {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+    padding: 10px;
+    max-height: calc(100% - 100px); /* 메시지 로그 영역의 최대 높이 설정 */
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.chat-message.sent {
+    background-color: #e0ffe0;
+    text-align: right;
+}
+
+.chat-message.received {
+    background-color: #f0f0f0;
+}
+
+/* 입력 필드와 전송 버튼 영역 스타일 */
+.input-container {
+    display: flex;
+    margin-top: 10px;
+}
+
+#chat-message-input {
+    width: calc(100% - 90px); /* 버튼의 너비를 고려하여 입력 필드 너비 설정 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+#chat-message-submit {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+#chat-message-submit:hover {
+    background-color: #0056b3;
+}
+
+/* 스크롤바 스타일 */
+#chat-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-log::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+#chat-log::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}

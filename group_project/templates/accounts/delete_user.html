@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 삭제</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>사용자 삭제</h1>
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="form-container">
+                <p>정말로 "{{ user.username }}" 사용자를 삭제하시겠습니까?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="button">삭제</button>
+                    <a href="{% url 'user_list' %}" class="button">취소</a>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
