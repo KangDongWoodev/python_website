@@ -3,35 +3,32 @@
 
 {% block content %}
 <h1>채팅 목록</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}">
 <ul>
     {% for user in users %}
         <li>
-            <a href="javascript:void(0);" onclick="openChat('{{ user.id }}', '{{ user.username }}')" class="button">{{ user.username }}</a>
+            <a href="javascript:void(0);" onclick="openChat('{{ user.id }}', '{{ user.username }}')" class="button"  style="margin-top: 10px; margin-bottom: 10px;">{{ user.username }}</a>
         </li>
     {% endfor %}
 </ul>
 
-<!-- room-name 요소 추가 -->
-<div id="room-name" data-room-name=""></div> <!-- room_name을 동적으로 설정할 수 있습니다. -->
+<div id="room-name" data-room-name=""></div>
 
-<!-- 팝업 창 -->
 <div id="chat-popup" class="chat-popup" style="display:none;">
     <div class="chat-container">
         <div class="chat-header">
-            <h2 id="chat-header-title"></h2> <!-- 채팅 상대의 이름이 표시됩니다. -->
+            <h2 id="chat-header-title"></h2>
         </div>
-        <div id="chat-log" class="chat-log"></div> <!-- 채팅 메시지 로그가 표시됩니다. -->
+        <div id="chat-log" class="chat-log"></div>
         <div class="input-container">
             <input id="chat-message-input" type="text" placeholder="메시지를 입력하세요..." />
             <button id="chat-message-submit" type="button">전송</button>
         </div>
-        <button onclick="closeChat()">닫기</button> <!-- 팝업을 닫는 버튼 -->
+        <button onclick="closeChat()">닫기</button>
     </div>
 </div>
 
-<script src="{% static 'js/chat.js' %}"></script> <!-- JavaScript 파일 로드 -->
+<script src="{% static 'js/chat.js' %}"></script>
 {% endblock %}
-
-
 
 

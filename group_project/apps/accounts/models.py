@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
-class CustomUserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):  ##사용자 계정을 생성할 때의 로직을 정의
     def create_user(self, username, email=None, password=None, **extra_fields):
         if not username:
             raise ValueError('The Username field must be set')
@@ -19,7 +19,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True) # 이메일 필드 
     first_name = models.CharField(max_length=30, blank=True)  # 이름 필드 추가
     last_name = models.CharField(max_length=30, blank=True)   # 성 필드 추가
     is_active = models.BooleanField(default=True)
