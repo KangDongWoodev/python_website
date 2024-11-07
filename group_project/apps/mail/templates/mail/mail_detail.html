@@ -20,7 +20,8 @@
             <p><strong>보낸 사람:</strong> {{ mail.sender }}</p>
             <p><strong>받는 사람:</strong> {{ mail.recipient }}</p>
             <p><strong>내용:</strong> {{ mail.body }}</p>
-            {% if mail.attachments.all %}
+
+            {% if mail.attachments.exists %}
                 <h3>첨부파일:</h3>
                 <ul>
                     {% for attachment in mail.attachments.all %}

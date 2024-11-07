@@ -1,114 +1,104 @@
 /* 전체 레이아웃 스타일 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f0f2f5; /* 밝은 회색 배경 */
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
 }
 
-.container {
-    width: 100%;
-    max-width: 800px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.page-title {
+/* 채팅 목록 스타일 */
+h1 {
     text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
 }
 
-/* 채팅룸 스타일 */
-#chat-room {
+/* 팝업 스타일 */
+.chat-popup {
+    position: fixed; /* 고정 위치 */
+    top: 50%; /* 화면 중앙에 위치 */
+    left: 50%; /* 화면 중앙에 위치 */
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    width: 90%; /* 폭 설정 */
+    max-width: 600px; /* 최대 폭 설정 */
+    background-color: #ffffff; /* 흰색 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 그림자 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
+    display: none; /* 기본적으로 숨김 */
+}
+
+/* 채팅 컨테이너 스타일 */
+.chat-container {
     display: flex;
     flex-direction: column;
-    height: 90vh; /* 채팅창을 브라우저 높이에 맞게 설정 */
-    position: relative;
+    height: 400px; /* 채팅 컨테이너 높이 설정 */
 }
 
-/* 상대방 이름 영역 스타일 */
-#receiver {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+/* 채팅 헤더 스타일 */
+.chat-header {
+    padding: 15px;
+    background-color: #007bff; /* 파란색 헤더 */
+    color: white; /* 흰색 텍스트 */
+    border-top-left-radius: 10px; /* 둥근 모서리 */
+    border-top-right-radius: 10px; /* 둥근 모서리 */
 }
 
-/* 메시지 로그 영역 스타일 */
-#chat-log {
-    flex: 1;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fafafa;
-    padding: 10px;
-    max-height: calc(100% - 100px); /* 메시지 로그 영역의 최대 높이 설정 */
+/* 채팅 로그 스타일 */
+.chat-log {
+    flex: 1; /* 공간을 다 차지하도록 */
+    overflow-y: auto; /* 스크롤 가능 */
+    padding: 20px; /* 패딩을 늘려서 더 넓은 여백 */
+    border-bottom: 1px solid #ddd; /* 하단 경계선 */
 }
 
+/* 각 메시지 스타일 */
 .chat-message {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
+    margin-bottom: 10px; /* 하단 여백 */
+    padding: 10px; /* 패딩 */
+    border-radius: 15px; /* 둥근 모서리 */
+    max-width: 80%; /* 최대 너비 */
 }
 
+/* 보낸 메시지 스타일 */
 .chat-message.sent {
-    background-color: #e0ffe0;
-    text-align: right;
+    background-color: #007bff; /* 보낸 메시지 배경색 */
+    color: white; /* 보낸 메시지 텍스트 색 */
+    align-self: flex-end; /* 오른쪽 정렬 */
 }
 
+/* 받은 메시지 스타일 */
 .chat-message.received {
-    background-color: #f0f0f0;
+    background-color: #f1f1f1; /* 받은 메시지 배경색 */
+    color: black; /* 받은 메시지 텍스트 색 */
+    align-self: flex-start; /* 왼쪽 정렬 */
 }
 
 /* 입력 필드와 전송 버튼 영역 스타일 */
 .input-container {
-    display: flex;
-    margin-top: 10px;
+    display: flex; /* 가로 정렬 */
+    padding: 10px; /* 패딩 */
+    border-top: 1px solid #ddd; /* 상단 경계선 */
 }
 
+/* 입력 필드 스타일 */
 #chat-message-input {
-    width: calc(100% - 90px); /* 버튼의 너비를 고려하여 입력 필드 너비 설정 */
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
-    box-sizing: border-box;
+    flex: 1; /* 공간을 다 차지하도록 */
+    padding: 10px; /* 패딩 */
+    border: 1px solid #ddd; /* 경계선 */
+    border-radius: 20px; /* 둥근 모서리 */
+    margin-right: 10px; /* 오른쪽 여백 */
 }
 
+/* 전송 버튼 스타일 */
 #chat-message-submit {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
+    padding: 10px 20px; /* 패딩 */
+    border: none; /* 테두리 없음 */
+    border-radius: 20px; /* 둥근 모서리 */
+    background-color: #007bff; /* 파란색 배경 */
+    color: white; /* 흰색 텍스트 */
+    cursor: pointer; /* 커서 포인터 */
 }
 
+/* 전송 버튼 호버 효과 */
 #chat-message-submit:hover {
-    background-color: #0056b3;
-}
-
-/* 스크롤바 스타일 */
-#chat-log::-webkit-scrollbar {
-    width: 8px;
-}
-
-#chat-log::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 4px;
-}
-
-#chat-log::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+    background-color: #0056b3; /* 어두운 파란색 배경 */
 }

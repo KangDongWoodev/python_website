@@ -1,9 +1,10 @@
 # group_project/urls.py
-
 from django.contrib import admin
 from django.urls import path, include
 from apps.accounts import views as accounts_views
 from django.contrib.auth.views import LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,3 +16,10 @@ urlpatterns = [
     path('mail/', include('apps.mail.urls')),  # 메일 앱의 URL 연결
     path('logout/', LogoutView.as_view(next_page='/accounts/login/'), name='logout'),  # 로그아웃 후 로그인 페이지로 리디렉트
 ]
+
+# 개발 중에만 media 파일 제공
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

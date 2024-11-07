@@ -1,39 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>사내 메신저</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <script src="{% static 'js/chat.js' %}"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- 제목을 중앙에 배치 -->
-        <h1 class="page-title">사내 메신저</h1>
-
-        <!-- 채팅방 콘텐츠 -->
-        <div id="chat-room">
-            <!-- 상대방의 사용자 이름 표시 -->
-            <div id="receiver">
-                <strong>채팅참여자 : </strong> {{ receiver.username }}
-            </div>
-
-            <!-- 메시지 로그 표시 -->
-            <div id="chat-log">
-                {% for message in messages %}
-                    <div class="chat-message {% if message.sender == user %}sent{% else %}received{% endif %}">
-                        <strong>{{ message.sender.username }}:</strong> {{ message.content }}
-                    </div>
-                {% endfor %}
-            </div>
-
-            <!-- 새로운 메시지 입력 필드 및 전송 버튼 -->
-            <div class="input-container">
-                <input id="chat-message-input" type="text" placeholder="내용을 입력 해 주세요" />
-                <button id="chat-message-submit" type="button">Send</button>
-            </div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>채팅방: {{ receiver.username }}</h2>
+        </div>
+        <div id="chat-log" class="chat-log"></div>
+        <div class="input-container">
+            <input id="chat-message-input" type="text" placeholder="메시지를 입력하세요..." />
+            <button id="chat-message-submit" type="button">전송</button>
         </div>
     </div>
-
-    <script src="{% static 'js/chat.js' %}"></script>
 </body>
 </html>
+

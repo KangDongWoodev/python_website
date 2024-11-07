@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import attendance_check, home
 
-app_name = 'attendance'  # 또는 'messenger', 'mail'에 맞게 네임스페이스 정의
+app_name = 'attendance'  # 여기에 app_name을 추가해야 합니다.
 
 urlpatterns = [
-    path('', views.index, name='index'),  # URL 패턴 정의
+    path('', home, name='index'),  # 홈 페이지의 URL 패턴
+    path('check/', attendance_check, name='attendance_check'),  # 출석 체크 페이지
 ]

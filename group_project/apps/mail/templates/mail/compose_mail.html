@@ -16,7 +16,7 @@
     </header>
     <main>
         <div class="main-container" style="max-width: 600px; margin: 0 auto;">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data"> <!-- enctype 추가 -->
                 {% csrf_token %}
                 
                 {% if form.errors %}

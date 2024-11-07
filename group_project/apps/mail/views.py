@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, redirect
 from .forms import MailForm
+from django.shortcuts import render, get_object_or_404
 from .models import Mail
 from django.shortcuts import render, redirect
 from .models import Mail
@@ -24,16 +25,18 @@ def mail_list(request):
 
 def compose_mail(request):
     if request.method == "POST":
-        form = MailForm(request.POST, request.FILES)
+        form = MailForm(request.POST, request.FILES)  # request.FILES 추가
         if form.is_valid():
             mail = form.save(commit=False)
             mail.sender = request.user  # 현재 로그인한 사용자를 발신자로 설정
             mail.save()
             form.save_m2m()  # Many-to-many 관계 필드를 저장
+
+            # 첨부 파일 저장
+            for file in request.FILES.getlist('attachments'):
+                mail.attachments.create(file=file)
+
             return redirect('mail:mail_list')  # 메일 목록 페이지로 이동
-        else:
-            # 폼이 유효하지 않은 경우 오류 메시지 출력
-            print(form.errors)
     else:
         form = MailForm()
 
@@ -56,6 +59,9 @@ def send_mail(request):
     
     return render(request, 'compose_mail.html', {'form': form})
 
-def mail_detail(request, mail_id):
-    mail = get_object_or_404(Mail, id=mail_id)
-    return render(request, 'mail_detail.html', {'mail': mail})
+def mail_detail(request, pk):
+    mail = get_object_or_404(Mail, pk=pk)
+    context = {
+        'mail': mail,
+    }
+    return render(request, 'mail/mail_detail.html', context)
