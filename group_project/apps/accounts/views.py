@@ -41,17 +41,28 @@ def user_list_view(request):
     # 'accounts/user_list.html' 템플릿을 사용하여 사용자 목록을 렌더링
     return render(request, 'accounts/user_list.html', {'users': users})
 
-# 사용자 생성 뷰
-@admin_required
+# 관리자만 접근할 수 있는 사용자 생성 페이지
+@admin_required  # 이 함수는 관리자만 사용할 수 있도록 설정
 def create_user_view(request):
+    # 요청이 POST 방식일 때 (즉, 사용자가 정보를 입력해서 제출했을 때)
     if request.method == 'POST':
+        # 사용자가 입력한 데이터를 담아 새 사용자 정보 만들기
         form = CustomUserCreationForm(request.POST)
+        
+        # 입력한 정보가 제대로 되었는지 확인
         if form.is_valid():
+            # 새 사용자 정보 저장
             form.save()
+            # 성공 메시지 보여주기
             messages.success(request, '사용자가 성공적으로 생성되었습니다.')
+            # 사용자 목록 페이지로 이동
             return redirect('user_list')
     else:
+        # 요청이 GET 방식일 때 (즉, 페이지를 처음 열었을 때)
+        # 빈 사용자 입력 양식 준비
         form = CustomUserCreationForm()
+        
+    # 사용자 생성 페이지에 입력 양식 보내기
     return render(request, 'accounts/create_user.html', {'form': form})
 
 # 사용자 수정 뷰 (Admin 유저만 접근 가능)

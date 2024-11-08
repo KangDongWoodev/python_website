@@ -11,7 +11,7 @@
     <header style="text-align: center; padding: 10px; background-color: #4682B4; color: white;">
         <h1>{{ year }}년 {{ month }}월 달력</h1>
         <nav>
-            <form method="GET" action="{% url 'scheduler:calendar_by_month' year month %}" style="display: inline-block; margin: 10px;">
+            <form method="GET" action="{% url 'scheduler:calendar_by_month' year=year month=month %}" style="display: inline-block; margin: 10px;">
                 <label for="year">년도:</label>
                 <select name="year" id="year">
                     {% for y in year_range %}
@@ -78,4 +78,3 @@
     </main>
 </body>
 </html>
-
